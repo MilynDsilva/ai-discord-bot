@@ -14,6 +14,18 @@ const commands = [
   {
     name: 'user',
     description: 'Provides information about the user.'
+  },
+  {
+    name: 'ask',
+    description: 'Ask something',
+    options: [
+      {
+        name: 'question',
+        description: 'Your question',
+        type: 3, // 3 corresponds to STRING type for Discord slash commands
+        required: true,
+      },
+    ],
   }
 ];
 
