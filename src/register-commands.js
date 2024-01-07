@@ -38,6 +38,30 @@ const commands = [
         required: true,
       },
     ],
+  },
+  {
+    name: 'gemini',
+    description: 'Ask google ai gemini',
+    options: [
+      {
+        name: 'text',
+        description: 'Your text',
+        type: 3, // 3 corresponds to STRING type for Discord slash commands
+        required: true,
+      },
+    ],
+  },
+  {
+    name: 'image',
+    description: 'Generate some image',
+    options: [
+      {
+        name: 'text',
+        description: 'Your text',
+        type: 3, // 3 corresponds to STRING type for Discord slash commands
+        required: true,
+      },
+    ],
   }
 ];
 

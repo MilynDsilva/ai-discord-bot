@@ -4,10 +4,10 @@ const axios = require('axios');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('translate')
-        .setDescription('Translates given input text.').addStringOption(option =>
+        .setName('gemini')
+        .setDescription('Ask google gemini something.').addStringOption(option =>
             option.setName('text')
-                .setDescription('Input text to translate')
+                .setDescription('Input text')
                 .setRequired(true)),
 
     async execute(interaction) {
@@ -15,32 +15,37 @@ module.exports = {
         const clientMessage = interaction.options.getString('text') || null;
 
         let response = '';
-
         const options = {
             method: 'POST',
-            url: process.env.RAPID_API_TRANSLATES_URL,
+            url: process.env.RAPID_API_GEMINI_URL,
             headers: {
                 'content-type': 'application/json',
                 'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-                'X-RapidAPI-Host': process.env.RAPID_API_TRANSLATES_HOST
+                'X-RapidAPI-Host': process.env.RAPID_API_GEMINI_HOST
             },
             data: {
-                texts: [
-                    clientMessage,
-                ],
-                tls: ['kn', 'ru'],
-                sl: 'en'
+                contents: [
+                    {
+                        role: 'user',
+                        parts: [
+                            {
+                                text: clientMessage
+                            }
+                        ]
+                    }
+                ]
             }
         };
 
         try {
             const result = await axios.request(options);
-            response = result.data[1]["texts"]
+            response = result.data.candidates[0].content.parts[0].text
         } catch (error) {
+            response = error.response.data.message
             console.error(error);
         }
 
-        await interaction.editReply(`***Text To Translate:*** ${clientMessage}\n***Tanslated Text:*** ${response}`);
+        await interaction.editReply(`***Prompt:*** ${clientMessage}\n***Response:*** ${response}`);
 
     },
 };
