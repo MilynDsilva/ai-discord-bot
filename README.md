@@ -11,4 +11,5 @@ Run the following commands in your terminal:
 nodemon index.js && node src/register-commands.js
 ```
 https://github.com/openai/openai-node/discussions/217
+https://app.edenai.run/admin/billing/plan
 
