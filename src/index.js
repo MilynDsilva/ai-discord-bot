@@ -54,5 +54,7 @@ client.on(Events.InteractionCreate, async interaction => {
     }
 });
 
+
+
 // Bot Log In
 client.login(process.env.DISCORD_BOT_TOKEN);
