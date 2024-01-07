@@ -26,6 +26,18 @@ const commands = [
         required: true,
       },
     ],
+  },
+  {
+    name: 'translate',
+    description: 'Translate something to russian',
+    options: [
+      {
+        name: 'text',
+        description: 'Your text',
+        type: 3, // 3 corresponds to STRING type for Discord slash commands
+        required: true,
+      },
+    ],
   }
 ];
 
