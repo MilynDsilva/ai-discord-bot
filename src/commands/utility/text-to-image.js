@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../../../logger/logger');
 const axios = require('axios');
 const provider = 'stabilityai';
@@ -39,7 +39,9 @@ module.exports = {
         axios.request(config)
             .then(async (result) => {
                 response = result.data[provider].items[0]["image_resource_url"]
-                await interaction.editReply(`***Prompt:*** ${clientMessage}\n***Response:*** StabilityAi:${response}`);
+                const embed = new EmbedBuilder()
+                    .setImage(response);
+                await interaction.editReply({ embeds: [embed] })
             })
             .catch((error) => {
                 logger.error(error);
