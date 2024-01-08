@@ -1,7 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../../../logger/logger');
 const axios = require('axios');
-const provider = 'stabilityai';
+const provider = 'stabilityai'; //stabilityai , openai, deepai
+const allowdeUsers = ['milyndsilva','leanderrobin']
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,6 +14,11 @@ module.exports = {
 
     async execute(interaction) {
         await interaction.deferReply();
+        const interactionUser = interaction.user.username;
+        if (!allowdeUsers.includes(interactionUser)) {
+            await interaction.editReply({ content: `Unfortunately, You don't have the necessary permissions to execute this command!` })
+            return;
+        }
         const clientMessage = interaction.options.getString('text') || null;
 
         let response = '';
@@ -41,7 +47,7 @@ module.exports = {
                 response = result.data[provider].items[0]["image_resource_url"]
                 const embed = new EmbedBuilder()
                     .setImage(response);
-                await interaction.editReply({ embeds: [embed] })
+                await interaction.editReply({ content: `***Prompt:*** ${clientMessage}`, embeds: [embed] })
             })
             .catch((error) => {
                 logger.error(error);
