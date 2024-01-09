@@ -1,7 +1,8 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const logger = require('../../../logger/logger');
 const axios = require('axios');
-const provider = 'stabilityai';
+const provider = 'stabilityai'; //stabilityai , openai, deepai
+const { checkPermissions } = require('../../auth/permissions');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,13 +14,18 @@ module.exports = {
 
     async execute(interaction) {
         await interaction.deferReply();
+        const hasPermission = await checkPermissions(interaction);
+        
+        if (!hasPermission) {
+            return;
+        }
+
         const clientMessage = interaction.options.getString('text') || null;
 
         let response = '';
-        const axios = require('axios');
 
         let data = JSON.stringify({
-            "providers": "stabilityai",
+            "providers": provider,
             "text": clientMessage,
             "resolution": "512x512",
             "num_images": 2
@@ -39,7 +45,9 @@ module.exports = {
         axios.request(config)
             .then(async (result) => {
                 response = result.data[provider].items[0]["image_resource_url"]
-                await interaction.editReply(`***Prompt:*** ${clientMessage}\n***Response:*** StabilityAi:${response}`);
+                const embed = new EmbedBuilder()
+                    .setImage(response);
+                await interaction.editReply({ content: `***Prompt:*** ${clientMessage}`, embeds: [embed] })
             })
             .catch((error) => {
                 logger.error(error);
