@@ -4,7 +4,7 @@ const logger = require('../../../logger/logger');
 const apiKey = process.env.OPEN_AI_API_KEY;
 const API_ENDPOINT = process.env.OPEN_AI_API_URL;
 const OPEN_AI_MODEL = 'gpt-3.5-turbo';
-const allowdeUsers = ['milyndsilva', 'leanderrobin']
+const { checkPermissions } = require('../../auth/permissions');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -16,11 +16,13 @@ module.exports = {
 
     async execute(interaction) {
         await interaction.deferReply();
-        const interactionUser = interaction.user.username;
-        if (!allowdeUsers.includes(interactionUser)) {
-            await interaction.editReply({ content: `Unfortunately, You don't have the necessary permissions to execute this command!` })
+
+        const hasPermission = await checkPermissions(interaction);
+        
+        if (!hasPermission) {
             return;
         }
+
         const clientMessage = interaction.options.getString('question') || null;
 
         let response = '';

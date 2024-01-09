@@ -1,0 +1,1 @@
+exports.NO_REQUIRED_PERMISSIONS_TO_EXECUTE_THIS_COMMAND = `Unfortunately, You don't have the necessary permissions to execute this command!`;
