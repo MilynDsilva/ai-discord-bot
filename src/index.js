@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: '../.env' });
 const path = require('path');
 const fs = require('fs');
+const keepAlive = require('../src/server/keep-alive')
 
 client.commands = new Collection();
 
