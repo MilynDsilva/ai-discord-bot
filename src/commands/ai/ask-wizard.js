@@ -5,7 +5,7 @@ const apiKey = process.env.OPEN_AI_API_KEY;
 const API_ENDPOINT = process.env.OPEN_AI_API_URL;
 const OPEN_AI_MODEL = 'gpt-3.5-turbo';
 const { checkPermissions } = require('../../auth/permissions');
-const prefix = 'development-'; //development- , ''
+const prefix = ''; //development- , ''
 
 module.exports = {
     data: new SlashCommandBuilder()
