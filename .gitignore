@@ -2,3 +2,4 @@ node_modules/
 package-lock.json
 yarn.lock
 .env
+src/register-commands-dev.js
