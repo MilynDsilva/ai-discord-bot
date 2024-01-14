@@ -62,6 +62,18 @@ const commands = [
         required: true,
       },
     ],
+  },
+  {
+    name: `valorant-skin`,
+    description: 'Partial/ full search by valorant skin name',
+    options: [
+      {
+        name: `name`,
+        description: 'Search by skin name',
+        type: 3, // 3 corresponds to STRING type for Discord slash commands
+        required: true,
+      },
+    ],
   }
 ];
 

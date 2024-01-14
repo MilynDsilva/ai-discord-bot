@@ -5,10 +5,11 @@ const apiKey = process.env.OPEN_AI_API_KEY;
 const API_ENDPOINT = process.env.OPEN_AI_API_URL;
 const OPEN_AI_MODEL = 'gpt-3.5-turbo';
 const { checkPermissions } = require('../../auth/permissions');
+const prefix = 'development-'; //development- , ''
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ask')
+        .setName(`${prefix}ask`)
         .setDescription('Provides response from ChatGPT.').addStringOption(option =>
             option.setName('question')
                 .setDescription('The question that you want answered')
