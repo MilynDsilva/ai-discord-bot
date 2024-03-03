@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Balance</title>
+    <style>
+        /* Global Reset */
+        body,
+        h1,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 20px 0;
+            color: #333333;
+            font-size: 30px;
+            /* Increased font size */
+            font-weight: bold;
+            /* Bold font */
+            text-align: center;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .balance {
+            font-size: 42px;
+            /* Increased font size */
+            font-weight: bold;
+            /* Bold font */
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #555555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Current Balance</h1>
+            <p style="text-align: center;">Dear {{USER}},</p>
+            <p style="text-align: center;">Your current account balance is (INR):</p>
+            <p class="balance">&#8377; {{CURRENT_BALANCE}}</p>
+            <p style="text-align: center;">Date: {{currentDate}}</span></p>
+            <p style="text-align: center;">Thank you - AI Discord Bot!</p>
+        </div>
+        <div class="footer">
+            <p>© 2024 AI Discord Bot. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+        // Get current date in Indian timezone
+    </script>
+</body>
+
+</html>
